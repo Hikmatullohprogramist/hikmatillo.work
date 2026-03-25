@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xikmatillo Madaliyev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #060d0a;
+            --bg2: #0d1a13;
+            --green: #00e676;
+            --cyan: #00bcd4;
+            --orange: #ff6d00;
+            --white: #f0f4f0;
+            --muted: #4a6355;
+            --border: rgba(0, 230, 118, 0.15);
+            --display: 'Bebas Neue', sans-serif;
+            --body: 'Bricolage Grotesque', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--body);
+            overflow-x: hidden;
+            cursor: none
+        }
+
+        .cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--green);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(0, 230, 118, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.12s ease;
+            mix-blend-mode: difference
+        }
+
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--d, 3s) ease-in-out infinite
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.1
+            }
+
+            50% {
+                opacity: 0.8
+            }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2.5rem;
+            background: rgba(6, 13, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nav-logo {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            color: var(--green)
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 0.5rem
+        }
+
+        .nav-icon {
+            width: 46px;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            gap: 2px;
+            transition: all 0.2s;
+            cursor: none
+        }
+
+        .nav-icon:hover {
+            background: rgba(0, 230, 118, 0.1);
+            border-color: var(--green);
+            transform: translateY(-2px)
+        }
+
+        .nav-icon-emoji {
+            font-size: 1.1rem;
+            line-height: 1
+        }
+
+        .nav-icon-label {
+            font-size: 0.48rem;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.02em
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem 2rem
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 3rem 2rem 1.5rem
+        }
+
+        /* ═══════════════════════════════════════
+   REALISTIC iPHONE MOCKUP
+   ═══════════════════════════════════════ */
+        .phone-scene {
+            position: relative;
+            width: 300px;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 60px 80px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 40px rgba(0, 230, 118, 0.08));
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-18px)
+            }
+        }
+
+        /* Outer shell - iPhone body */
+        .iphone-outer {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(145deg, #8a9bb5 0%, #b8c8e0 15%, #6e80a0 30%, #9aabc5 50%, #7080a0 70%, #aabbda 85%, #6878a0 100%);
+            border-radius: 42px;
+            padding: 3px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+                inset 1px 0 0 rgba(255, 255, 255, 0.3),
+                inset -1px 0 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Side buttons */
+        .iphone-outer::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 80px;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(to right, #5a6880, #8a9bb5);
+            border-radius: 2px 0 0 2px;
+            box-shadow: 0 36px 0 #8a9bb5, 0 70px 0 #8a9bb5;
+        }
+
+        .iphone-outer::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 120px;
+            width: 4px;
+            height: 52px;
+            background: linear-gradient(to left, #5a6880, #8a9bb5);
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* Inner bezel */
+        .iphone-inner {
+            background: #1a1a1f;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Screen */
+        .iphone-screen {
+            background: radial-gradient(ellipse at 20% 10%, #0f2018 0%, #060d0a 60%);
+            position: relative;
+            aspect-ratio: 9/19.5;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            width: 110px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .di-camera {
+            width: 10px;
+            height: 10px;
+            background: #1a1a1f;
+            border-radius: 50%;
+            border: 1.5px solid #2a2a2f
+        }
+
+        .di-speaker {
+            width: 40px;
+            height: 5px;
+            background: #111;
+            border-radius: 10px
+        }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 20px 0;
+            flex-shrink: 0;
+        }
+
+        .status-time {
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.3px;
+            font-family: var(--body)
+        }
+
+        .status-icons {
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .signal-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 1.5px;
+            height: 10px
+        }
+
+        .bar {
+            width: 2.5px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1px
+        }
+
+        .bar:nth-child(1) {
+            height: 25%
+        }
+
+        .bar:nth-child(2) {
+            height: 50%
+        }
+
+        .bar:nth-child(3) {
+            height: 75%
+        }
+
+        .bar:nth-child(4) {
+            height: 100%
+        }
+
+        .wifi-icon {
+            font-size: 9px;
+            color: #fff;
+            opacity: 0.9
+        }
+
+        .battery {
+            width: 20px;
+            height: 10px;
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 1.5px
+        }
+
+        .battery::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0 1px 1px 0
+        }
+
+        .battery-fill {
+            width: 75%;
+            height: 100%;
+            background: #4cd137;
+            border-radius: 1px
+        }
+
+        /* App grid */
+        .app-grid {
+            flex: 1;
+            padding: 8px 14px 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px 4px;
+            align-content: start;
+            overflow: hidden;
+        }
+
+        /* App icon styles */
+        .app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none
+        }
+
+        .app-bg {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+
+        /* iOS tap: scale down like real iOS */
+        .app:active .app-bg,
+        .app.tapped .app-bg {
+            transform: scale(0.82);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Ripple overlay on tap */
+        .app-ripple {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            opacity: 0;
+            z-index: 3;
+            animation: ripple-fade 0.35s ease forwards;
+        }
+
+        @keyframes ripple-fade {
+            0% {
+                opacity: 0.45;
+                transform: scale(0.7)
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.2)
+            }
+        }
+
+        /* iOS-style gloss */
+        .app-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 48%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25), transparent);
+            border-radius: 12px 12px 0 0;
+            z-index: 1;
+        }
+
+        .app-label {
+            font-size: 0.42rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            line-height: 1.3;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            font-family: var(--body);
+            font-weight: 400
+        }
+
+        /* App open animation — screen slide */
+        .app-open-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border-radius: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .app-open-overlay.show {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .app-open-icon {
+            font-size: 2.5rem;
+            animation: app-bounce 0.4s ease
+        }
+
+        @keyframes app-bounce {
+            0% {
+                transform: scale(0.4)
+            }
+
+            60% {
+                transform: scale(1.15)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        .app-open-name {
+            font-family: var(--display);
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            color: #fff
+        }
+
+        .app-open-action {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.1em
+        }
+
+        .app-open-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            color: #fff;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* App icon colors */
+        .a-flutter {
+            background: linear-gradient(145deg, #0d47a1, #1565c0, #1976d2)
+        }
+
+        .a-dart {
+            background: linear-gradient(145deg, #006064, #00838f, #0097a7)
+        }
+
+        .a-github {
+            background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460)
+        }
+
+        .a-linkedin {
+            background: linear-gradient(145deg, #0077b5, #0288d1, #039be5)
+        }
+
+        .a-security {
+            background: linear-gradient(145deg, #b71c1c, #c62828, #d32f2f)
+        }
+
+        .a-ctf {
+            background: linear-gradient(145deg, #e65100, #ef6c00, #f57c00)
+        }
+
+        .a-firebase {
+            background: linear-gradient(145deg, #e65100, #bf360c, #ff6f00)
+        }
+
+        .a-telegram {
+            background: linear-gradient(145deg, #01579b, #0277bd, #0288d1)
+        }
+
+        .a-bloc {
+            background: linear-gradient(145deg, #4a148c, #6a1b9a, #7b1fa2)
+        }
+
+        .a-hive {
+            background: linear-gradient(145deg, #f57f17, #f9a825, #fbc02d)
+        }
+
+        .a-api {
+            background: linear-gradient(145deg, #1b5e20, #2e7d32, #388e3c)
+        }
+
+        .a-owasp {
+            background: linear-gradient(145deg, #880e4f, #ad1457, #c2185b)
+        }
+
+        /* Dock */
+        .iphone-dock {
+            padding: 8px 14px 10px;
+            flex-shrink: 0;
+        }
+
+        .dock-inner {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 8px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dock-app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px
+        }
+
+        /* Home indicator */
+        .home-indicator {
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .home-bar {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 10px
+        }
+
+        /* Flutter badge at bottom */
+        .flutter-badge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            text-align: center;
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: var(--body);
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .flutter-badge span {
+            color: #54c5f8
+        }
+
+        /* Screen stars */
+        .screen-star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--d, 3s) ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* HERO RIGHT */
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background: var(--green)
+        }
+
+        .hero-name {
+            font-family: var(--display);
+            font-size: clamp(3.2rem, 5.5vw, 5rem);
+            line-height: 0.92;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem
+        }
+
+        .hero-name .green {
+            color: var(--green)
+        }
+
+        .typed-wrap {
+            font-family: var(--display);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            min-height: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem
+        }
+
+        .typed-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--green);
+            animation: blink 0.7s infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.9;
+            max-width: 420px;
+            margin-bottom: 2rem
+        }
+
+        .hero-socials {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem
+        }
+
+        .social-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.15rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            color: var(--white);
+            transition: all 0.2s;
+            cursor: none;
+            background: rgba(255, 255, 255, 0.04)
+        }
+
+        .social-pill:hover {
+            border-color: var(--green);
+            color: var(--green);
+            background: rgba(0, 230, 118, 0.08)
+        }
+
+        .social-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green)
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 2.5rem;
+            padding: 1.2rem 0;
+            border-top: 1px solid var(--border)
+        }
+
+        .stat-num {
+            font-family: var(--display);
+            font-size: 2.2rem;
+            color: var(--green);
+            line-height: 1
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 2px
+        }
+
+        /* MARQUEE */
+        .marquee-section {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            background: rgba(0, 230, 118, 0.02)
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 2.5rem;
+            animation: marquee 22s linear infinite;
+            white-space: nowrap;
+            width: max-content
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        .marquee-item {
+            font-family: var(--display);
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem
+        }
+
+        .marquee-item em {
+            color: var(--green);
+            font-style: normal;
+            font-size: 0.7rem
+        }
+
+        /* SECTIONS */
+        .section {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 2.5rem
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .eyebrow {
+            font-family: var(--display);
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            color: var(--green);
+            margin-bottom: 0.4rem
+        }
+
+        .big-h {
+            font-family: var(--display);
+            font-size: clamp(3rem, 7vw, 7rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 3rem
+        }
+
+        .big-h .dim {
+            color: rgba(255, 255, 255, 0.18)
+        }
+
+        .big-h .accent {
+            color: var(--green)
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start
+        }
+
+        .muted-p {
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 1rem;
+            margin-bottom: 1rem
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .stat-box {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg2);
+            transition: border-color 0.2s
+        }
+
+        .stat-box:hover {
+            border-color: rgba(0, 230, 118, 0.35)
+        }
+
+        .stat-box-num {
+            font-family: var(--display);
+            font-size: 2.4rem;
+            line-height: 1
+        }
+
+        .stat-box-label {
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 0.75rem
+        }
+
+        .skill-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.65rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.82rem;
+            background: rgba(0, 230, 118, 0.03);
+            transition: all 0.2s;
+            cursor: none
+        }
+
+        .skill-chip:hover {
+            border-color: var(--green);
+            transform: translateY(-2px);
+            background: rgba(0, 230, 118, 0.08)
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .statement-section {
+            position: relative;
+            z-index: 1;
+            padding: 5rem 2.5rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .statement-text {
+            font-family: var(--display);
+            font-size: clamp(3.5rem, 9vw, 9rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .statement-text .acc {
+            color: var(--green)
+        }
+
+        .statement-text .dim {
+            color: rgba(255, 255, 255, 0.15)
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem
+        }
+
+        .proj-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg2);
+            transition: all 0.25s;
+            cursor: none;
+            display: flex;
+            flex-direction: column
+        }
+
+        .proj-card:hover {
+            border-color: rgba(0, 230, 118, 0.4);
+            transform: translateY(-5px)
+        }
+
+        .proj-thumb {
+            height: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .proj-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 55%, var(--bg2))
+        }
+
+        .proj-body {
+            padding: 1.25rem;
+            flex: 1
+        }
+
+        .proj-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            color: var(--green);
+            text-transform: uppercase;
+            margin-bottom: 0.35rem
+        }
+
+        .proj-name {
+            font-family: var(--display);
+            font-size: 1.45rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5rem
+        }
+
+        .proj-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 1rem
+        }
+
+        .proj-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap
+        }
+
+        .proj-tag {
+            font-size: 0.68rem;
+            padding: 0.2rem 0.65rem;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            color: var(--cyan);
+            background: rgba(0, 188, 212, 0.05)
+        }
+
+        .proj-footer {
+            padding: 0.75rem 1.25rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .proj-link {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+            cursor: none
+        }
+
+        .proj-link:hover {
+            color: var(--green)
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem
+        }
+
+        .c-link {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: none;
+            background: var(--bg2)
+        }
+
+        .c-link:hover {
+            border-color: rgba(0, 230, 118, 0.4);
+            transform: translateX(6px)
+        }
+
+        .c-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem
+        }
+
+        .c-platform {
+            font-family: var(--display);
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: var(--muted)
+        }
+
+        .c-handle {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--white)
+        }
+
+        .c-arrow {
+            color: var(--muted);
+            font-size: 1.2rem;
+            transition: color 0.2s
+        }
+
+        .c-link:hover .c-arrow {
+            color: var(--green)
+        }
+
+        .form-box {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg2)
+        }
+
+        .form-label-txt {
+            font-family: var(--display);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 1.25rem
+        }
+
+        .f-input {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.78rem 1rem;
+            color: var(--white);
+            font-family: var(--body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 0.85rem
+        }
+
+        .f-input:focus {
+            border-color: var(--green)
+        }
+
+        textarea.f-input {
+            resize: vertical;
+            min-height: 110px
+        }
+
+        .f-btn {
+            background: var(--green);
+            color: var(--bg);
+            border: none;
+            border-radius: 6px;
+            padding: 0.85rem 1.5rem;
+            font-family: var(--display);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            cursor: none;
+            transition: opacity 0.2s;
+            width: 100%
+        }
+
+        .f-btn:hover {
+            opacity: 0.85
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 2.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .footer-logo {
+            font-family: var(--display);
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+            color: var(--muted)
+        }
+
+        .footer-live {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--muted)
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7)
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease
+        }
+
+        .reveal.on {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ═══════════════════════════════════════
+   ACCESS GRANTED INTRO
+   ═══════════════════════════════════════ */
+        #access-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.6s ease;
+        }
+
+        #access-screen.hide {
+            opacity: 0;
+            pointer-events: none
+        }
+
+        .access-scanline {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 230, 118, 0.015) 2px, rgba(0, 230, 118, 0.015) 4px);
+            pointer-events: none;
+        }
+
+        .access-scanline::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 230, 118, 0.04), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            to {
+                top: 200%
+            }
+        }
+
+        .access-lock {
+            font-size: 4rem;
+            animation: lockPulse 1s ease-in-out;
+            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.6));
+        }
+
+        @keyframes lockPulse {
+            0% {
+                transform: scale(0.5);
+                opacity: 0
+            }
+
+            60% {
+                transform: scale(1.2)
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .access-terminal {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--green);
+            text-align: center;
+            line-height: 2;
+            letter-spacing: 0.08em;
+            min-height: 140px;
+        }
+
+        .access-terminal .line {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease
+        }
+
+        .access-terminal .line.show {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .access-bar-wrap {
+            width: 260px;
+            height: 3px;
+            background: rgba(0, 230, 118, 0.15);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .access-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--green);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--green);
+            transition: width 0.05s linear;
+        }
+
+        .access-granted {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.3em;
+            color: var(--green);
+            opacity: 0;
+            text-shadow: 0 0 30px rgba(0, 230, 118, 0.8);
+            animation: grantedFlash 0.5s ease forwards;
+            animation-play-state: paused;
+        }
+
+        .access-granted.play {
+            animation-play-state: running
+        }
+
+        @keyframes grantedFlash {
+            0% {
+                opacity: 0;
+                transform: scale(1.3);
+                letter-spacing: 0.5em
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                letter-spacing: 0.3em
+            }
+        }
+
+        .access-corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-color: var(--green);
+            border-style: solid;
+            opacity: 0.4
+        }
+
+        .ac-tl {
+            top: 20px;
+            left: 20px;
+            border-width: 2px 0 0 2px
+        }
+
+        .ac-tr {
+            top: 20px;
+            right: 20px;
+            border-width: 2px 2px 0 0
+        }
+
+        .ac-bl {
+            bottom: 20px;
+            left: 20px;
+            border-width: 0 0 2px 2px
+        }
+
+        .ac-br {
+            bottom: 20px;
+            right: 20px;
+            border-width: 0 2px 2px 0
+        }
+
+        .access-skip {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.7rem;
+            color: rgba(0, 230, 118, 0.35);
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border: none;
+            background: none;
+            transition: color 0.2s;
+        }
+
+        .access-skip:hover {
+            color: var(--green)
+        }
+
+        /* ═══════════════════════════════════════
+   PHONE APP DEMO SLIDER
+   ═══════════════════════════════════════ */
+        .phone-demo-overlay {
+            position: absolute;
+            inset: 0;
+            background: #0a1410;
+            z-index: 25;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .phone-demo-overlay.show {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .demo-header {
+            padding: 8px 12px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 230, 118, 0.1);
+            flex-shrink: 0;
+        }
+
+        .demo-app-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+            color: var(--green);
+        }
+
+        .demo-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.65rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-slides {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .demo-slide.active {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .demo-slide.prev {
+            opacity: 0;
+            transform: translateX(-30px)
+        }
+
+        .demo-screen-img {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 230, 118, 0.12);
+            background: var(--bg);
+            aspect-ratio: 9/16;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .demo-screen-bar {
+            height: 4px;
+            background: var(--green);
+            border-radius: 2px 2px 0 0;
+            width: var(--w, 60%);
+        }
+
+        .demo-screen-content {
+            flex: 1;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .demo-row {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.08)
+        }
+
+        .demo-row.accent {
+            background: rgba(0, 230, 118, 0.25);
+            width: 60%
+        }
+
+        .demo-row.short {
+            width: 40%
+        }
+
+        .demo-row.medium {
+            width: 70%
+        }
+
+        .demo-card-row {
+            display: flex;
+            gap: 4px;
+            margin-top: 2px;
+        }
+
+        .demo-mini-card {
+            flex: 1;
+            height: 40px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 230, 118, 0.1);
+        }
+
+        .demo-fab {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+        }
+
+        .demo-slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        .demo-dots {
+            padding: 4px 0 6px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .demo-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .demo-dot.active {
+            background: var(--green);
+            width: 16px;
+            border-radius: 3px
+        }
+
+        .demo-nav {
+            padding: 0 12px 8px;
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .demo-btn {
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            color: var(--green);
+            background: rgba(0, 230, 118, 0.08);
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            transition: all 0.15s;
+        }
+
+        .demo-btn:hover {
+            background: rgba(0, 230, 118, 0.18)
+        }
+
+        .demo-btn:disabled {
+            opacity: 0.2;
+            cursor: default
+        }
+
+        @media(max-width:768px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .hero-left {
+                padding: 5.5rem 1.25rem 1rem;
+                order: 2
+            }
+
+            .hero-right {
+                padding: 5rem 1.25rem 2rem;
+                order: 1
+            }
+
+            .phone-scene {
+                width: 220px
+            }
+
+            .two-col,
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+
+            .section {
+                padding: 4rem 1.25rem
+            }
+
+            nav {
+                padding: 0.75rem 1.25rem
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center
+            }
+
+            .statement-section {
+                padding: 3rem 1.25rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor" id="cur"></div>
+    <div class="cursor-ring" id="curR"></div>
+    <div id="stars"></div>
+
+    <!-- ACCESS GRANTED INTRO -->
+    <div id="access-screen">
+        <div class="access-scanline"></div>
+        <div class="ac-tl access-corner"></div>
+        <div class="ac-tr access-corner"></div>
+        <div class="ac-bl access-corner"></div>
+        <div class="ac-br access-corner"></div>
+        <div class="access-lock" id="accessLock">🔒</div>
+        <div class="access-terminal" id="accessTerminal">
+            <div class="line" id="l1">&gt; Initializing portfolio...</div>
+            <div class="line" id="l2">&gt; Scanning credentials...</div>
+            <div class="line" id="l3">&gt; Identity: <span style="color:#fff">Xikmatillo Madaliyev</span></div>
+            <div class="line" id="l4">&gt; Role: Flutter Dev &amp; Cyber Security</div>
+            <div class="line" id="l5">&gt; Status: <span style="color:var(--green)">VERIFIED ✓</span></div>
+        </div>
+        <div class="access-bar-wrap">
+            <div class="access-bar" id="accessBar"></div>
+        </div>
+        <div class="access-granted" id="accessGranted">ACCESS GRANTED</div>
+        <button class="access-skip" onclick="skipIntro()">SKIP ▶</button>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">XM</div>
+        <div class="nav-icons">
+            <a href="#about" class="nav-icon"><span class="nav-icon-emoji">👤</span><span
+                    class="nav-icon-label">About</span></a>
+            <a href="#skills" class="nav-icon"><span class="nav-icon-emoji">⚡</span><span
+                    class="nav-icon-label">Skills</span></a>
+            <a href="#projects" class="nav-icon"><span class="nav-icon-emoji">📱</span><span
+                    class="nav-icon-label">Projects</span></a>
+            <a href="https://github.com/Hikmatullohprogramist" target="_blank" class="nav-icon"><span
+                    class="nav-icon-emoji">🐙</span><span class="nav-icon-label">Github</span></a>
+            <a href="#contact" class="nav-icon"><span class="nav-icon-emoji">✉️</span><span
+                    class="nav-icon-label">Contact</span></a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <!-- LEFT: Realistic iPhone -->
+        <div class="hero-left">
+            <div class="phone-scene">
+                <div class="iphone-outer">
+                    <div class="iphone-inner">
+                        <div class="iphone-screen">
+                            <!-- Stars on screen -->
+                            <div class="screen-star"
+                                style="width:1.5px;height:1.5px;top:15%;left:8%;--d:2.5s;opacity:0.6"></div>
+                            <div class="screen-star"
+                                style="width:1px;height:1px;top:25%;left:85%;--d:3.5s;opacity:0.4;animation-delay:1s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:2px;height:2px;top:55%;left:20%;--d:4s;opacity:0.5;animation-delay:0.5s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:1px;height:1px;top:65%;left:70%;--d:2s;opacity:0.7;animation-delay:1.5s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:1.5px;height:1.5px;top:78%;left:45%;--d:3s;opacity:0.3;animation-delay:2s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:1px;height:1px;top:40%;left:55%;--d:5s;opacity:0.5;animation-delay:0.2s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:2px;height:2px;top:70%;left:10%;--d:3.2s;opacity:0.4;animation-delay:0.8s">
+                            </div>
+                            <div class="screen-star"
+                                style="width:1px;height:1px;top:85%;left:80%;--d:2.8s;opacity:0.6;animation-delay:1.2s">
+                            </div>
+
+                            <!-- Dynamic Island -->
+                            <div class="dynamic-island">
+                                <div class="di-camera"></div>
+                                <div class="di-speaker"></div>
+                            </div>
+
+                            <!-- Status bar -->
+                            <div class="status-bar">
+                                <div class="status-time">9:41</div>
+                                <div class="status-icons">
+                                    <div class="signal-bars">
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                    </div>
+                                    <span class="wifi-icon">▲</span>
+                                    <div class="battery">
+                                        <div class="battery-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- App Demo Slider -->
+                            <div class="phone-demo-overlay" id="phoneDemo">
+                                <div class="demo-header">
+                                    <div class="demo-app-name" id="demoAppName">E-COMMERCE</div>
+                                    <button class="demo-close" onclick="closeDemo()">✕</button>
+                                </div>
+                                <div class="demo-slides" id="demoSlides">
+                                    <!-- Slide 1: Home -->
+                                    <div class="demo-slide active" id="ds0">
+                                        <div class="demo-screen-img">
+                                            <div class="demo-screen-bar" style="--w:100%"></div>
+                                            <div class="demo-screen-content">
+                                                <div class="demo-row accent"></div>
+                                                <div class="demo-card-row">
+                                                    <div class="demo-mini-card"></div>
+                                                    <div class="demo-mini-card"></div>
+                                                </div>
+                                                <div class="demo-row medium" style="margin-top:4px"></div>
+                                                <div class="demo-row short"></div>
+                                                <div class="demo-card-row" style="margin-top:2px">
+                                                    <div class="demo-mini-card" style="height:50px"></div>
+                                                    <div class="demo-mini-card" style="height:50px"></div>
+                                                    <div class="demo-mini-card" style="height:50px"></div>
+                                                </div>
+                                                <div class="demo-row" style="margin-top:4px"></div>
+                                                <div class="demo-row medium"></div>
+                                            </div>
+                                            <div class="demo-fab">+</div>
+                                        </div>
+                                        <div class="demo-slide-title">Bosh sahifa</div>
+                                    </div>
+                                    <!-- Slide 2: Detail -->
+                                    <div class="demo-slide" id="ds1">
+                                        <div class="demo-screen-img">
+                                            <div
+                                                style="height:55%;background:rgba(0,230,118,0.06);display:flex;align-items:center;justify-content:center;font-size:1.6rem">
+                                                📱</div>
+                                            <div class="demo-screen-content">
+                                                <div class="demo-row accent" style="width:80%"></div>
+                                                <div class="demo-row short"></div>
+                                                <div class="demo-row medium"></div>
+                                                <div
+                                                    style="margin-top:6px;height:18px;border-radius:4px;background:var(--green);opacity:0.8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="demo-slide-title">Mahsulot sahifasi</div>
+                                    </div>
+                                    <!-- Slide 3: Profile -->
+                                    <div class="demo-slide" id="ds2">
+                                        <div class="demo-screen-img">
+                                            <div class="demo-screen-content"
+                                                style="align-items:center;padding-top:16px">
+                                                <div
+                                                    style="width:36px;height:36px;border-radius:50%;background:rgba(0,230,118,0.3);margin-bottom:6px">
+                                                </div>
+                                                <div class="demo-row accent" style="width:50%"></div>
+                                                <div class="demo-row short" style="width:35%"></div>
+                                                <div
+                                                    style="width:100%;margin-top:8px;display:flex;flex-direction:column;gap:4px">
+                                                    <div class="demo-row"></div>
+                                                    <div class="demo-row medium"></div>
+                                                    <div class="demo-row short"></div>
+                                                    <div class="demo-row"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="demo-slide-title">Profil sahifasi</div>
+                                    </div>
+                                </div>
+                                <div class="demo-dots" id="demoDots">
+                                    <div class="demo-dot active" onclick="goSlide(0)"></div>
+                                    <div class="demo-dot" onclick="goSlide(1)"></div>
+                                    <div class="demo-dot" onclick="goSlide(2)"></div>
+                                </div>
+                                <div class="demo-nav">
+                                    <button class="demo-btn" id="demoPrev" onclick="changeSlide(-1)" disabled>◀
+                                        ORQAGA</button>
+                                    <button class="demo-btn" id="demoNext" onclick="changeSlide(1)">KEYINGI ▶</button>
+                                </div>
+                            </div>
+
+                            <!-- App Open Overlay -->
+                            <div class="app-open-overlay" id="appOverlay">
+                                <button class="app-open-close" onclick="closeApp()">✕</button>
+                                <div class="app-open-icon" id="overlayIcon"></div>
+                                <div class="app-open-name" id="overlayName"></div>
+                                <div class="app-open-action" id="overlayAction"></div>
+                            </div>
+
+                            <!-- App Grid -->
+                            <div class="app-grid">
+                                <div class="app" onclick="openDemo(this,'E-COMMERCE APP')" data-name="Flutter"
+                                    data-icon="💙" data-action="" data-url="">
+                                    <div class="app-bg a-flutter">
+                                        <svg style="position:relative;z-index:2;width:26px;height:26px"
+                                            viewBox="0 0 100 100" fill="none">
+                                            <path d="M55.3 21L16 60l13.3 13.3L81.9 21H55.3z"
+                                                fill="rgba(255,255,255,0.9)" />
+                                            <path d="M29.3 73.3L55.3 99l13.3-13.3-13.3-13.4 26.6-26.7H55.3L29.3 73.3z"
+                                                fill="rgba(255,255,255,0.7)" />
+                                            <path d="M55.3 45.6L42 59l13.3 13.3 13.3-13.3-13.3-13.4z"
+                                                fill="rgba(255,255,255,0.5)" />
+                                        </svg>
+                                    </div>
+                                    <span class="app-label">Flutter</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="Dart" data-icon="🎯"
+                                    data-action="dart.dev ga o'tish..." data-url="https://dart.dev">
+                                    <div class="app-bg a-dart"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🎯</span></div>
+                                    <span class="app-label">Dart</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="GitHub" data-icon="🐙"
+                                    data-action="Profil ochilmoqda..."
+                                    data-url="https://github.com/Hikmatullohprogramist">
+                                    <div class="app-bg a-github"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🐙</span></div>
+                                    <span class="app-label">Github</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="LinkedIn" data-icon="💼"
+                                    data-action="Profil ochilmoqda..." data-url="https://linkedin.com/in/flutterchiaka">
+                                    <div class="app-bg a-linkedin"><span
+                                            style="position:relative;z-index:2;font-size:1.15rem;font-weight:700;color:#fff;font-family:var(--body)">in</span>
+                                    </div>
+                                    <span class="app-label">LinkedIn</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="Security" data-icon="🛡️"
+                                    data-action="O'rganilmoqda..." data-url="">
+                                    <div class="app-bg a-security"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🛡️</span></div>
+                                    <span class="app-label">Security</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="CTF" data-icon="⚔️"
+                                    data-action="Challenge qidirilmoqda..." data-url="">
+                                    <div class="app-bg a-ctf"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">⚔️</span></div>
+                                    <span class="app-label">CTF</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="Firebase" data-icon="🔥"
+                                    data-action="Console ochilmoqda..." data-url="https://firebase.google.com">
+                                    <div class="app-bg a-firebase"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🔥</span></div>
+                                    <span class="app-label">Firebase</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="Telegram" data-icon="✈️"
+                                    data-action="@Xikmatillo_work..." data-url="https://t.me/Xikmatillo_work">
+                                    <div class="app-bg a-telegram"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">✈️</span></div>
+                                    <span class="app-label">Telegram</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="BLoC" data-icon="📦"
+                                    data-action="pub.dev ga o'tish..." data-url="https://pub.dev/packages/bloc">
+                                    <div class="app-bg a-bloc"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">📦</span></div>
+                                    <span class="app-label">BLoC</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="Hive DB" data-icon="🍯"
+                                    data-action="pub.dev ga o'tish..." data-url="https://pub.dev/packages/hive">
+                                    <div class="app-bg a-hive"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🍯</span></div>
+                                    <span class="app-label">Hive</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="REST API" data-icon="🌐"
+                                    data-action="Docs ochilmoqda..." data-url="">
+                                    <div class="app-bg a-api"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🌐</span></div>
+                                    <span class="app-label">REST API</span>
+                                </div>
+                                <div class="app" onclick="openApp(this)" data-name="OWASP" data-icon="🔓"
+                                    data-action="owasp.org ga o'tish..." data-url="https://owasp.org">
+                                    <div class="app-bg a-owasp"><span
+                                            style="position:relative;z-index:2;font-size:1.3rem">🔓</span></div>
+                                    <span class="app-label">OWASP</span>
+                                </div>
+                            </div>
+
+                            <!-- Dock -->
+                            <div class="iphone-dock">
+                                <div class="dock-inner">
+                                    <div class="dock-app app" onclick="openApp(this)" data-name="Qo'ng'iroq"
+                                        data-icon="📞" data-action="Bog'lanilmoqda..." data-url="tel:+998916697165">
+                                        <div class="app-bg"
+                                            style="width:42px;height:42px;background:linear-gradient(145deg,#1b8c1b,#27ae27,#2ecc2e)">
+                                            <svg style="position:relative;z-index:2;width:22px;height:22px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"
+                                                    fill="white" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="dock-app app" onclick="openApp(this)" data-name="Xabar" data-icon="💬"
+                                        data-action="Salom! Flutter loyiha haqida gaplashmoqchi edim."
+                                        data-url="sms:+998916697165?body=Salom%20Xikmatillo!%20Flutter%20loyiha%20haqida%20gaplashmoqchi%20edim%20%F0%9F%9A%80">
+                                        <div class="app-bg"
+                                            style="width:42px;height:42px;background:linear-gradient(145deg,#1a8c1a,#22aa22,#28cc28)">
+                                            <svg style="position:relative;z-index:2;width:22px;height:22px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+                                                    fill="white" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="dock-app app" onclick="openApp(this)" data-name="Telegram"
+                                        data-icon="✈️" data-action="@Xikmatillo_work..."
+                                        data-url="https://t.me/Xikmatillo_work">
+                                        <div class="app-bg a-telegram" style="width:42px;height:42px">
+                                            <svg style="position:relative;z-index:2;width:22px;height:22px"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"
+                                                    fill="white" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="dock-app app" onclick="openApp(this)" data-name="GitHub" data-icon="🐙"
+                                        data-action="Hikmatullohprogramist..."
+                                        data-url="https://github.com/Hikmatullohprogramist">
+                                        <div class="app-bg a-github" style="width:42px;height:42px">
+                                            <svg style="position:relative;z-index:2;width:22px;height:22px"
+                                                viewBox="0 0 24 24" fill="white">
+                                                <path
+                                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Home indicator -->
+                            <div class="home-indicator">
+                                <div class="home-bar"></div>
+                            </div>
+
+                            <!-- Flutter badge -->
+                            <div class="flutter-badge">Build With <span>⚡ Flutter</span> Using 💙</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="hero-right">
+            <div class="hero-tag">Flutter Developer &amp; Cyber Security</div>
+            <h1 class="hero-name">👋 MEN<br><span class="green">XIKMATILLO...</span></h1>
+            <div class="typed-wrap"><span id="typed"></span><span class="typed-cursor"></span></div>
+            <p class="hero-desc">2 yillik tajriba bilan cross-platform mobil ilovalar yarataman. Flutter &amp; Dart
+                asosiy qurollarim. 10+ loyiha muvaffaqiyatli yakunlangan.</p>
+            <div class="hero-socials">
+                <a href="https://github.com/Hikmatullohprogramist" target="_blank" class="social-pill"><span
+                        class="social-pill-dot"></span>GitHub</a>
+                <a href="https://linkedin.com/in/flutterchiaka" target="_blank" class="social-pill"><span
+                        class="social-pill-dot" style="background:var(--cyan)"></span>LinkedIn</a>
+                <a href="https://t.me/Xikmatillo_work" target="_blank" class="social-pill"><span class="social-pill-dot"
+                        style="background:var(--orange)"></span>Telegram</a>
+            </div>
+            <div class="stats-bar">
+                <div>
+                    <div class="stat-num">2+</div>
+                    <div class="stat-label">Yil Tajriba</div>
+                </div>
+                <div>
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">Loyihalar</div>
+                </div>
+                <div>
+                    <div class="stat-num" style="color:var(--cyan)">2</div>
+                    <div class="stat-label">Platform</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item">FLUTTER <em>✦</em></div>
+            <div class="marquee-item">DART <em>✦</em></div>
+            <div class="marquee-item">CYBER SECURITY <em>✦</em></div>
+            <div class="marquee-item">MOBILE DEV <em>✦</em></div>
+            <div class="marquee-item">FIREBASE <em>✦</em></div>
+            <div class="marquee-item">BLoC <em>✦</em></div>
+            <div class="marquee-item">REST API <em>✦</em></div>
+            <div class="marquee-item">ANDROID &amp; iOS <em>✦</em></div>
+            <div class="marquee-item">FLUTTER <em>✦</em></div>
+            <div class="marquee-item">DART <em>✦</em></div>
+            <div class="marquee-item">CYBER SECURITY <em>✦</em></div>
+            <div class="marquee-item">MOBILE DEV <em>✦</em></div>
+            <div class="marquee-item">FIREBASE <em>✦</em></div>
+            <div class="marquee-item">BLoC <em>✦</em></div>
+            <div class="marquee-item">REST API <em>✦</em></div>
+            <div class="marquee-item">ANDROID &amp; iOS <em>✦</em></div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="section-inner">
+            <div class="eyebrow">01 — HAQIMDA</div>
+            <h2 class="big-h reveal">MEN <span class="dim">BIR</span><br><span class="accent">FLUTTER</span><br><span
+                    class="dim">DASTURCHISI</span></h2>
+            <div class="two-col reveal">
+                <div>
+                    <p class="muted-p">Salom! Men <strong style="color:var(--white)">Xikmatillo Madaliyev</strong> —
+                        Flutter frameworkida 2 yildan ortiq tajribaga ega mobil dasturchi.</p>
+                    <p class="muted-p">Asosiy yo'nalishim <strong style="color:var(--green)">Flutter &amp; Dart</strong>
+                        bilan Android va iOS uchun bir vaqtda sifatli ilovalar yaratish. Hozirda <strong
+                            style="color:var(--cyan)">Kiber Xavfsizlik</strong> sohasini ham faol o'rganmoqdaman.</p>
+                    <p class="muted-p">10 dan ortiq loyihani muvaffaqiyatli yakunladim.</p>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-box-num" style="color:var(--green)">2+</div>
+                        <div class="stat-box-label">Yillik Tajriba</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-num" style="color:var(--green)">10+</div>
+                        <div class="stat-box-label">Loyihalar</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-num" style="color:var(--cyan)">2</div>
+                        <div class="stat-box-label">Platform</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-num" style="color:var(--orange);font-size:1.4rem;padding-top:0.3rem">
+                            CYBER<br>SEC</div>
+                        <div class="stat-box-label">O'rganayapman</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills" style="border-top:1px solid var(--border)">
+        <div class="section-inner">
+            <div class="eyebrow">02 — KO'NIKMALAR</div>
+            <h2 class="big-h reveal"><span class="dim">MENING</span><br><span class="accent">STACK</span></h2>
+            <div class="skills-grid reveal">
+                <div class="skill-chip"><span class="skill-dot" style="background:#54c5f8"></span>Flutter</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#0075ba"></span>Dart</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#00e5ff"></span>BLoC</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#ff6584"></span>GetX</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#ce93d8"></span>Provider</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#ffca28"></span>Firebase</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#4db6ac"></span>REST API</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#81c784"></span>SQLite</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#b0bec5"></span>Hive</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#3ddc84"></span>Android</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#e0e0e0"></span>iOS</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>Linux</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>OWASP</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>Networking</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:var(--orange)"></span>CTF</div>
+                <div class="skill-chip"><span class="skill-dot" style="background:#607d8b"></span>Git</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <div class="statement-section">
+        <div class="statement-text reveal">
+            <span class="dim">G'OYALARNI</span><br>
+            <span class="acc">ILOVALARGA</span><br>
+            <span class="dim">AYLANTIRAMAN</span>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+        <div class="section-inner">
+            <div class="eyebrow">03 — LOYIHALAR</div>
+            <h2 class="big-h reveal"><span class="dim">MENING</span><br><span class="accent">ISHLARIM</span></h2>
+            <div class="projects-grid reveal">
+                <div class="proj-card">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#0d2818,#0a3d2e)">🛒</div>
+                    <div class="proj-body">
+                        <div class="proj-label">Mobile App</div>
+                        <div class="proj-name">E-Commerce App</div>
+                        <div class="proj-desc">To'liq funksional online do'kon. Mahsulot katalogi, savat, to'lov
+                            integratsiyasi va admin panel.</div>
+                        <div class="proj-tags"><span class="proj-tag">Flutter</span><span
+                                class="proj-tag">Firebase</span><span class="proj-tag">BLoC</span></div>
+                    </div>
+                    <div class="proj-footer"><a href="https://github.com/Hikmatullohprogramist" target="_blank"
+                            class="proj-link">GitHub →</a><span style="font-size:0.7rem;color:var(--muted)">2024</span>
+                    </div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#1a0d2e,#2d1a4d)">🔐</div>
+                    <div class="proj-body">
+                        <div class="proj-label">Security App</div>
+                        <div class="proj-name">Password Manager</div>
+                        <div class="proj-desc">AES-256 shifrlash bilan mahalliy parol saqlash. Biometrik kirish
+                            imkoniyati bilan.</div>
+                        <div class="proj-tags"><span class="proj-tag">Flutter</span><span
+                                class="proj-tag">Hive</span><span class="proj-tag">Crypto</span></div>
+                    </div>
+                    <div class="proj-footer"><a href="https://github.com/Hikmatullohprogramist" target="_blank"
+                            class="proj-link">GitHub →</a><span style="font-size:0.7rem;color:var(--muted)">2024</span>
+                    </div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#0d1a2e,#0a2240)">📋</div>
+                    <div class="proj-body">
+                        <div class="proj-label">Productivity</div>
+                        <div class="proj-name">Task Manager</div>
+                        <div class="proj-desc">Real-time sinxronizatsiya bilan vazifalarni boshqarish va produktivlikni
+                            oshirish ilovasi.</div>
+                        <div class="proj-tags"><span class="proj-tag">Flutter</span><span
+                                class="proj-tag">GetX</span><span class="proj-tag">REST API</span></div>
+                    </div>
+                    <div class="proj-footer"><a href="https://github.com/Hikmatullohprogramist" target="_blank"
+                            class="proj-link">GitHub →</a><span style="font-size:0.7rem;color:var(--muted)">2023</span>
+                    </div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a0d,#2d2900)">💬</div>
+                    <div class="proj-body">
+                        <div class="proj-label">Social App</div>
+                        <div class="proj-name">Chat Application</div>
+                        <div class="proj-desc">Real-vaqt xabar almashish. Guruh chatlari, media yuborish, E2E shifrlash.
+                        </div>
+                        <div class="proj-tags"><span class="proj-tag">Flutter</span><span
+                                class="proj-tag">Firebase</span><span class="proj-tag">WebSocket</span></div>
+                    </div>
+                    <div class="proj-footer"><a href="https://github.com/Hikmatullohprogramist" target="_blank"
+                            class="proj-link">GitHub →</a><span style="font-size:0.7rem;color:var(--muted)">2023</span>
+                    </div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#0d1a0d,#0a2a10)">📰</div>
+                    <div class="proj-body">
+                        <div class="proj-label">News App</div>
+                        <div class="proj-name">News Aggregator</div>
+                        <div class="proj-desc">Turli manbalardan yangiliklar yig'uvchi ilova. Oflayn rejim va qidirish
+                            imkoniyati.</div>
+                        <div class="proj-tags"><span class="proj-tag">Flutter</span><span
+                                class="proj-tag">SQLite</span><span class="proj-tag">REST API</span></div>
+                    </div>
+                    <div class="proj-footer"><a href="https://github.com/Hikmatullohprogramist" target="_blank"
+                            class="proj-link">GitHub →</a><span style="font-size:0.7rem;color:var(--muted)">2023</span>
+                    </div>
+                </div>
+                <div class="proj-card" style="border-style:dashed;opacity:0.55">
+                    <div class="proj-thumb" style="background:linear-gradient(135deg,#1a0a0a,#2d0a0a)">🛡️</div>
+                    <div class="proj-body">
+                        <div class="proj-label" style="color:var(--orange)">Coming Soon</div>
+                        <div class="proj-name">Cyber Security Tool</div>
+                        <div class="proj-desc">Kiber xavfsizlik sohasidagi amaliy loyiha. Hozirda faol ishlanmoqda...
+                        </div>
+                        <div class="proj-tags"><span class="proj-tag"
+                                style="border-color:rgba(255,109,0,0.25);color:var(--orange)">Python</span><span
+                                class="proj-tag"
+                                style="border-color:rgba(255,109,0,0.25);color:var(--orange)">Linux</span></div>
+                    </div>
+                    <div class="proj-footer"><span class="proj-link">In progress...</span><span
+                            style="font-size:0.7rem;color:var(--muted)">2025</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" style="border-top:1px solid var(--border)">
+        <div class="section-inner">
+            <div class="eyebrow">04 — BOG'LANISH</div>
+            <h2 class="big-h reveal"><span class="dim">ALOQAGA</span><br><span class="accent">CHIQING</span></h2>
+            <div class="contact-grid reveal">
+                <div>
+                    <p class="muted-p" style="margin-bottom:2rem">Hamkorlik, yangi loyiha yoki oddiygina suhbat uchun
+                        murojaat qilishingiz mumkin. Telegram orqali tezroq javob beraman.</p>
+                    <div class="contact-links">
+                        <a href="https://github.com/Hikmatullohprogramist" target="_blank" class="c-link">
+                            <div class="c-icon" style="background:rgba(255,255,255,0.06)">🐙</div>
+                            <div>
+                                <div class="c-platform">GITHUB</div>
+                                <div class="c-handle">Hikmatullohprogramist</div>
+                            </div>
+                            <div class="c-arrow">→</div>
+                        </a>
+                        <a href="https://linkedin.com/in/flutterchiaka" target="_blank" class="c-link">
+                            <div class="c-icon" style="background:rgba(0,119,181,0.15)">💼</div>
+                            <div>
+                                <div class="c-platform">LINKEDIN</div>
+                                <div class="c-handle">flutterchiaka</div>
+                            </div>
+                            <div class="c-arrow">→</div>
+                        </a>
+                        <a href="https://t.me/Xikmatillo_work" target="_blank" class="c-link">
+                            <div class="c-icon" style="background:rgba(0,136,204,0.15)">✈️</div>
+                            <div>
+                                <div class="c-platform">TELEGRAM</div>
+                                <div class="c-handle">@Xikmatillo_work</div>
+                            </div>
+                            <div class="c-arrow">→</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-box">
+                    <div class="form-label-txt">XABAR YUBORISH</div>
+                    <form onsubmit="handleSubmit(event)">
+                        <input type="text" class="f-input" placeholder="Ismingiz">
+                        <input type="email" class="f-input" placeholder="Email yoki Telegram username">
+                        <textarea class="f-input" placeholder="Xabaringiz..."></textarea>
+                        <button type="submit" class="f-btn" id="fbtn">YUBORISH →</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">© 2025 XIKMATILLO MADALIYEV</div>
+        <div class="footer-live"><span class="live-dot"></span>Flutter bilan qurilgan</div>
+    </footer>
+
+    <script>
+        // ═══════════════════════════════
+        // ACCESS GRANTED INTRO
+        // ═══════════════════════════════
+        (function runIntro() {
+            const lines = ['l1', 'l2', 'l3', 'l4', 'l5'];
+            const bar = document.getElementById('accessBar');
+            const lock = document.getElementById('accessLock');
+            const granted = document.getElementById('accessGranted');
+            const screen = document.getElementById('access-screen');
+            let progress = 0, barInterval, done = false;
+            lines.forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('show'), 400 + i * 380));
+            setTimeout(() => { lock.textContent = '🔓'; lock.style.filter = 'drop-shadow(0 0 20px rgba(0,230,118,0.9))'; }, 400 + 4 * 380 + 200);
+            setTimeout(() => {
+                barInterval = setInterval(() => {
+                    progress += 1.4; bar.style.width = Math.min(progress, 100) + '%';
+                    if (progress >= 100) { clearInterval(barInterval); granted.classList.add('play'); setTimeout(finish, 900); }
+                }, 22);
+            }, 400 + 4 * 380 + 500);
+            function finish() { if (done) return; done = true; screen.classList.add('hide'); setTimeout(() => screen.style.display = 'none', 650); }
+            window.skipIntro = function () { clearInterval(barInterval); finish(); };
+        })();
+
+        // ═══════════════════════════════
+        // PHONE APP DEMO SLIDER
+        // ═══════════════════════════════
+        let curSlide = 0;
+        const totalSlides = 3;
+        function openDemo(el, appName) {
+            el.classList.add('tapped');
+            const bg = el.querySelector('.app-bg');
+            if (bg) { const r = document.createElement('div'); r.className = 'app-ripple'; bg.appendChild(r); setTimeout(() => { el.classList.remove('tapped'); r.remove() }, 350); }
+            document.getElementById('demoAppName').textContent = appName || 'ILOVA DEMO';
+            curSlide = 0; updateDemoSlide();
+            document.getElementById('phoneDemo').classList.add('show');
+        }
+        function closeDemo() { document.getElementById('phoneDemo').classList.remove('show'); }
+        function changeSlide(dir) {
+            const slides = document.querySelectorAll('.demo-slide');
+            slides[curSlide].classList.remove('active'); slides[curSlide].classList.add('prev');
+            setTimeout(() => slides[curSlide].classList.remove('prev'), 400);
+            curSlide = Math.max(0, Math.min(totalSlides - 1, curSlide + dir)); updateDemoSlide();
+        }
+        function goSlide(idx) { document.querySelectorAll('.demo-slide')[curSlide].classList.remove('active'); curSlide = idx; updateDemoSlide(); }
+        function updateDemoSlide() {
+            document.querySelectorAll('.demo-slide').forEach((s, i) => s.classList.toggle('active', i === curSlide));
+            document.querySelectorAll('.demo-dot').forEach((d, i) => d.classList.toggle('active', i === curSlide));
+            document.getElementById('demoPrev').disabled = curSlide === 0;
+            document.getElementById('demoNext').disabled = curSlide === totalSlides - 1;
+        }
+
+        // App tap interaction
+        function openApp(el) {
+            // Tap animation
+            el.classList.add('tapped');
+            const bg = el.querySelector('.app-bg');
+            const ripple = document.createElement('div');
+            ripple.className = 'app-ripple';
+            bg.appendChild(ripple);
+            setTimeout(() => { el.classList.remove('tapped'); ripple.remove() }, 350);
+
+            // Show overlay
+            const name = el.dataset.name;
+            const icon = el.dataset.icon;
+            const action = el.dataset.action;
+            const url = el.dataset.url;
+
+            document.getElementById('overlayIcon').textContent = icon;
+            document.getElementById('overlayName').textContent = name;
+            document.getElementById('overlayAction').textContent = action;
+
+            const overlay = document.getElementById('appOverlay');
+            overlay.show = url;
+            overlay.classList.add('show');
+
+            // If has URL, navigate after short delay
+            if (url) {
+                setTimeout(() => {
+                    overlay.classList.remove('show');
+                    window.open(url, '_blank');
+                }, 900);
+            } else {
+                setTimeout(() => overlay.classList.remove('show'), 1400);
+            }
+        }
+        function closeApp() {
+            document.getElementById('appOverlay').classList.remove('show');
+        }
+        const starsEl = document.getElementById('stars');
+        for (let i = 0; i < 140; i++) {
+            const s = document.createElement('div'); s.className = 'star';
+            const sz = Math.random() * 2 + 0.4;
+            s.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${sz}px;height:${sz}px;--d:${2 + Math.random() * 4}s;animation-delay:${Math.random() * 6}s;opacity:${Math.random() * 0.4 + 0.1}`;
+            starsEl.appendChild(s);
+        }
+        // Cursor
+        const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+        (function animR() { rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; requestAnimationFrame(animR) })();
+        // Typed
+        const words = ['Flutter Dasturchi', 'Cyber Security', 'Mobile Developer', 'Dart Expert'];
+        let wi = 0, ci = 0, del = false;
+        const tel = document.getElementById('typed');
+        function type() {
+            const w = words[wi];
+            if (!del) { tel.textContent = w.slice(0, ++ci); if (ci === w.length) { del = true; setTimeout(type, 1800); return } }
+            else { tel.textContent = w.slice(0, --ci); if (ci === 0) { del = false; wi = (wi + 1) % words.length } }
+            setTimeout(type, del ? 55 : 95);
+        }
+        type();
+        // Reveal
+        const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') }), { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        // Form
+        function handleSubmit(e) {
+            e.preventDefault();
+            const b = document.getElementById('fbtn');
+            b.textContent = 'YUBORILDI ✓'; b.style.background = 'var(--cyan)';
+            setTimeout(() => { b.textContent = 'YUBORISH →'; b.style.background = 'var(--green)' }, 3000);
+        }
+    </script>
+</body>
+
+</html>
